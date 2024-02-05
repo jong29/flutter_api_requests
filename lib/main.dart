@@ -1,3 +1,4 @@
+import 'package:api_request_testing/services/user_service.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -33,7 +34,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _sendRequest() {
     setState(() {
+      print("sending request");
+      postSignin();
       _response = "request sent!";
+      print("request sent");
     });
   }
 
