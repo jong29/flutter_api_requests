@@ -33,11 +33,11 @@ class _MyHomePageState extends State<MyHomePage> {
   String _response = "";
 
   void _sendRequest() {
-    setState(() {
-      print("sending request");
-      postSignin();
-      _response = "request sent!";
-      print("request sent");
+    print("sending request");
+    postSignin().then((response) {
+      setState(() {
+        _response = response;
+      });
     });
   }
 

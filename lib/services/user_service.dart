@@ -12,8 +12,8 @@ const bool testing = true;
 
 User? currentUser = UserController.currentUser;
 String idTokenString = currentUser?.getIdToken().toString() ?? "";
-// const String serverUrl = 'https://i10a603.p.ssafy.io';
-const String serverUrl = 'http://70.12.247.133';
+const String serverUrl = 'http://i10a603.p.ssafy.io:8081';
+// const String serverUrl = 'http://70.12.247.133';
 Map<String, String> reqHeaders = checkTesting();
 
 // POST /users/signup
@@ -37,7 +37,7 @@ Future<void> postSignup(UserSignupModel user) async {
 
 // POST /users/signin
 // 가입한적이 있는 경우 true, 없는 경우 false를 반환합니다.
-Future<bool> postSignin() async {
+Future<String> postSignin() async {
   print("before sending request");
   final response = await http.post(Uri.parse('$serverUrl/users/signin'),
       headers: reqHeaders);
@@ -46,12 +46,14 @@ Future<bool> postSignin() async {
 
   if (response.statusCode == 200) {
     print("success");
-    return true;
+    print(response.statusCode);
+    print(response.body.toString());
+    return response.body.toString();
   } else {
     print(response.statusCode);
     print(response.body);
     print("error");
-    return false;
+    return "failed";
   }
 }
 
