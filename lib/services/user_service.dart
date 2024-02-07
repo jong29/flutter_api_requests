@@ -17,7 +17,7 @@ const String serverUrl = 'http://i10a603.p.ssafy.io:8081';
 Map<String, String> reqHeaders = checkTesting();
 
 // POST /users/signup
-Future<void> postSignup(UserSignupModel user) async {
+Future<String> postSignup(UserSignupModel user) async {
   final response = await http.post(Uri.parse('$serverUrl/users/signup'),
       headers: reqHeaders, body: jsonEncode(user.toJson()));
 
@@ -25,6 +25,7 @@ Future<void> postSignup(UserSignupModel user) async {
     if (kDebugMode) {
       print("success");
     }
+    return response.body.toString();
   } else {
     if (kDebugMode) {
       print(response.statusCode);
